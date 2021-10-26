@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Blockchain
 {
     class Block
     {
+        private const string Solution = "000";
+
         public byte[] Hash { get; set; }
         public byte[] PrevHash { get;set; }
         public List<Transaction> Transactions { get; set; }
@@ -45,7 +48,7 @@ namespace Blockchain
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < this.Transactions.Count; i++)
             {
-                sb.Append(this.Transactions[i].hash);
+                sb.Append(this.Transactions[i].Hash);
             }
 
             return sb.ToString();
@@ -57,14 +60,12 @@ namespace Blockchain
 
             Spinner spinner = new Spinner(Console.CursorLeft, Console.CursorTop, 100);
 
-            string solution = "00";
-
             spinner.Start();
             bool mined = false;
 
             while (!mined)
             {
-                if (HelperFunctions.ConvertToHexString(this.Hash).StartsWith(solution))
+                if (HelperFunctions.ConvertToHexString(this.Hash).StartsWith(Solution))
                 {
                     spinner.Stop();
                     Console.WriteLine("Finished mined a block.");
