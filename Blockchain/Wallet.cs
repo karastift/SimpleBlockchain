@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
+
 
 namespace Blockchain
 {
     class Wallet
     {
-        public RSA KeyPair { get; set; }
+        public RSA KeyPair { get; }
         public RSAParameters AllParameters
         {
             get { return this.KeyPair.ExportParameters(true); }
         }
-
         public RSAParameters PublicParameters
         {
             get { return this.KeyPair.ExportParameters(false); }
@@ -30,7 +25,7 @@ namespace Blockchain
             Transaction transaction = new Transaction(this.KeyPair.ToXmlString(false), receiver, amount);
 
             transaction.Sign(this.AllParameters);
-            blockchain.AddTransaction(transaction, transaction.signedHash, this);
+            blockchain.AddTransaction(transaction, transaction.SignedHash, this);
         }
     }
 }

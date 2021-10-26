@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Security.Cryptography;
 
 
@@ -10,38 +7,19 @@ namespace Blockchain
 {
     class Transaction
     {
-        public byte[] hash
-        {
-            get;set;
-        }
-        public byte[] signedHash
-        {
-            get;set;
-        }
-
-        public string sender
-        {
-            get;set;
-        }
-        public string receiver
-        {
-            get;set;
-        }
-        public int amount
-        {
-            get;set;
-        }
-        public string time
-        {
-            get;set;
-        }
+        public byte[] Hash { get;set; }
+        public byte[] SignedHash { get;set; }
+        public string Sender { get; set; }
+        public string Receiver { get; set; }
+        public int Amount { get; set; }
+        public string Time { get; set; }
 
         public Transaction(string sender, string receiver, int amount)
         {
-            this.sender = sender;
-            this.receiver = receiver;
-            this.amount = amount;
-            this.time = DateTime.Now.ToString();
+            this.Sender = sender;
+            this.Receiver = receiver;
+            this.Amount = amount;
+            this.Time = DateTime.Now.ToString();
             this.CalculateHash();
         }
 
@@ -55,22 +33,22 @@ namespace Blockchain
 
             // Hash and sign the data. Pass a new instance of SHA256
             // to specify the hashing algorithm.
-            this.signedHash = RSAalg.SignData(this.Byteify(), SHA256.Create());
+            this.SignedHash = RSAalg.SignData(this.Byteify(), SHA256.Create());
         }
 
         public void CalculateHash()
         {
-            this.hash = HelperFunctions.GetSHA256Hash(this.Stringify());
+            this.Hash = HelperFunctions.GetSHA256Hash(this.Stringify());
         }
 
         public string Stringify()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(this.sender);
-            sb.Append(this.receiver);
-            sb.Append(this.amount);
-            sb.Append(this.time);
+            sb.Append(this.Sender);
+            sb.Append(this.Receiver);
+            sb.Append(this.Amount);
+            sb.Append(this.Time);
 
             return sb.ToString();
         }
