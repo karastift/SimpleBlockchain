@@ -51,9 +51,10 @@ namespace Blockchain
                 for (int i = 0; i < this.PendingTransactions.Count; i += this.BlockSize)
                 {
                     int end = i + this.BlockSize;
-                    if (end >= this.PendingTransactions.Count) end = this.PendingTransactions.Count - 1;
+                    if (end >= this.PendingTransactions.Count) end = this.PendingTransactions.Count;
 
                     List<Transaction> transactions = this.PendingTransactions.GetRange(i, end);
+
                     Block newBlock = new Block(this.LastBlock.Hash, transactions, this.Chain.Count - 1, 0);
 
                     newBlock.Mine();
@@ -67,6 +68,18 @@ namespace Blockchain
                 
                 return false;
             }
+        }
+        
+        public bool IsValidChain()
+        {
+
+            return true;
+        }
+
+        public int GetBalance(Wallet wallet)
+        {
+
+            return 0;
         }
     }
 }

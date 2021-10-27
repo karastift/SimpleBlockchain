@@ -7,7 +7,7 @@ namespace Blockchain
 {
     class Block
     {
-        private const string Solution = "000";
+        private const string Solution = "0000";
 
         public byte[] Hash { get; set; }
         public byte[] PrevHash { get;set; }
@@ -68,7 +68,7 @@ namespace Blockchain
                 if (HelperFunctions.ConvertToHexString(this.Hash).StartsWith(Solution))
                 {
                     spinner.Stop();
-                    Console.WriteLine("Finished mined a block.");
+                    Console.WriteLine($"Finished mining a block ({this.Transactions.Count} transactions included).");
                     mined = true;
                 }
                 else
