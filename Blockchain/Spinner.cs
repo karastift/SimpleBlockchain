@@ -34,7 +34,6 @@ namespace Blockchain
             active = false;
             Draw(' ');
             Draw('\n');
-            // just reset cursor
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 

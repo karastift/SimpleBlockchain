@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-
+using System.Reflection;
+using Newtonsoft.Json;
 
 namespace Blockchain
 {
@@ -64,6 +65,18 @@ namespace Blockchain
                 Console.WriteLine(e.Message);
 
                 return false;
+            }
+        }
+
+        public static void PrintObject(object o)
+        {
+            try
+            {
+                Console.WriteLine(JsonConvert.SerializeObject(o));
+            }
+            catch (CryptographicException) 
+            {
+                Console.WriteLine($"CryptographicExeception when trying to print the object.");
             }
         }
     }
